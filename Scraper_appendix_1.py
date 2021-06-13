@@ -28,14 +28,6 @@ def get_jobs(keyword, city, num_jobs, verbose=False):
 
     url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword=' + keyword + '&locT=C&locId=' + cities_dict[city] + '&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
     driver.get(url)
-    #Создать запрос на город + профессия
-    # driver.find_element_by_xpath('//*[@id="KeywordSearch"]').send_keys(keyword)
-    # time.sleep(1)
-    # driver.find_element_by_id('//*[@id="LocationSearch"]').clear()
-    # time.sleep(1)
-    # driver.find_element_by_xpath('//*[@id="LocationSearch"]').send_keys(city)
-    # time.sleep(1)
-    # driver.find_element_by_xpath('//*[@id="HeroSearchButton"]').click()
     jobs = []
 
     while len(jobs) < num_jobs:  # If true, should be still looking for new jobs.
@@ -43,13 +35,6 @@ def get_jobs(keyword, city, num_jobs, verbose=False):
         # Let the page load. Change this number based on your internet speed.
         # Or, wait until the webpage is loaded, instead of hardcoding it.
         time.sleep(2)
-
-        #         sign_in = driver.find_element_by_class_name("sign-in")
-        #         sign_in.click()
-        #         driver.find_element_by_xpath('//*[@id="userEmail"]').send_keys('daniilbi99@gmail.com')
-        #         driver.find_element_by_xpath('//*[@id="userPassword"]').send_keys('Lfybbk99')
-        #         driver.find_element_by_xpath('//*[@id="LoginModal"]/div/div/div[2]/div[2]/div[2]/div/div/div/div[3]/form/div[3]/div[1]/button').click()
-        #         time.sleep(7)
 
         try:
             driver.find_element_by_class_name("selected").click()
@@ -64,15 +49,8 @@ def get_jobs(keyword, city, num_jobs, verbose=False):
         except NoSuchElementException:
             pass
         time.sleep(2)
-        #         actionBuilder = ActionChains(driver)
-        #         actionBuilder.click(svgObj).perform()
         # Going through each job in this page
         job_buttons = driver.find_elements_by_class_name("jl")  # jl for Job Listing. These are the buttons we're going to click.
-        #         job_buttons[0].click()
-        #         time.sleep(2)
-        #         driver.switch_to.frame(driver.find_element_by_class('modal_main jaCreateAccountModalWrapper'))
-        #         el = driver.find_element_by_css_selector('span.SVGInline modal_closeIcon')
-        #         el.click();
 
         #         //Now after all your stuff done inside frame need to switch to default content
         for job_button in job_buttons:
